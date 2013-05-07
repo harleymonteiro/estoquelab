@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../layout/layout_app.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"> 
+
+    <ui:define name="content">
+        
+        
+        <h:form id="formUsuario">  
+  
+            <p:dataTable id="dataTableUsuario"  var="user" value="#{usuarioBean.listaUsuario}"  
+                 paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15,20,25,30,50,100">  
+                <f:facet name="header">  
+                    Usuários LabNet  
+                </f:facet>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="ID" />  
+                    </f:facet>  
+                    <h:outputText value="#{user.seqUsuario}" />  
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Nome" />  
+                    </f:facet>  
+                    <h:outputText value="#{user.nomeUsuario}" />  
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Login" />  
+                    </f:facet>  
+                    <h:outputText value="#{user.loginUsuario}" />  
+                </p:column>  
+
+                <p:column>  
+                    <f:facet name="header">  
+                        <h:outputText value="Status" />  
+                    </f:facet>  
+                    <h:outputText value="#{user.ativoUsuario}" />  
+                </p:column>  
+                
+                <p:column style="width:4%"> 
+                
+                <p:commandButton id="selectButton1" 
+                                 icon="ui-icon-plus" 
+                                 title="Dados Usuário"
+                                 update=":formUsuario:display"
+                                 oncomplete="userDialog.show()"
+                                 rendered="#{!user.ativoUsuario}">
+                    
+                    <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuario}" />
+                </p:commandButton>    
+                <p:commandButton id="selectButton2" 
+                                 icon="ui-icon-key"
+                                 update=":formUsuario:display"
+                                 oncomplete="userDialog.show()" 
+                                 title="Nova Senha"
+                                 rendered="#{user.ativoUsuario}">
+                    
+                 <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuario}" />
+                </p:commandButton>    
+                <p:commandButton id="selectButton3" 
+                                 icon="ui-icon-search" 
+                                 update=":formUsuario:display"
+                                 oncomplete="userDialog.show()"
+                                 title="Dados Usuário"
+                                 rendered="#{user.ativoUsuario}">
+                    <f:setPropertyActionListener value="#{user}" target="#{usuarioBean.usuario}" />
+                </p:commandButton>    
+        </p:column>
+                
+                
+            </p:dataTable> 
+            
+             <p:dialog dynamic="true" header="Formulário Usuário" widgetVar="userDialog" resizable="false" id="userDlg"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+  
+                <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+
+                    <f:facet name="header">  
+                        <p:outputLabel value="#{usuarioBean.usuario.nomeUsuario}"/>  
+                    </f:facet>  
+
+                    <p:outputLabel value="Login:" />  
+                    <p:outputLabel value="#{usuarioBean.usuario.loginUsuario}" style="font-weight:bold"/>  
+
+                    
+                    <p:outputLabel value="Tipo:" />  
+                    <h:selectOneMenu id="tipouser" value="#{usuarioBean.usuario.tipoUsuario}" 
+                                                     immediate="true" >
+                        <f:selectItem itemValue="SEMACESSO" />  
+                        <f:selectItem itemValue="USUARIO" />
+                        <f:selectItem itemValue="ADMIN" />
+                    </h:selectOneMenu>  
+
+                    <p:outputLabel value="Senha:" />  
+                    <p:outputLabel value="#{usuarioBean.usuario.senhaUsuario}" style="font-weight:bold"/>  
+
+                    <p:outputLabel value="Ativo:" />  
+                    <p:selectBooleanCheckbox value="#{usuarioBean.usuario.ativoUsuario}" style="font-weight:bold"/>  
+
+                    <p:commandButton value="Add" icon="ui-icon-disk" onclick="senhaUsuario.show();" oncomplete="userDialog.hide();" action="#{usuarioBean.inserirUsuario}" update=":formUsuario:display"/>
+                    
+                    
+                </h:panelGrid>  
+
+            </p:dialog> 
+            <p:dialog header="Senha do Usuário"  widgetVar="senhaUsuario" showEffect="explode" hideEffect="bounce" modal="true" height="100" update=":dataTableUsuario:display">  
+                <h:panelGrid columns="1" cellpadding="4" style="margin:0 auto;">  
+                    <h:outputText value="Nome: #{usuarioBean.usuario.nomeUsuario}" /> 
+                    <h:outputText value="Login: #{usuarioBean.usuario.loginUsuario}" /> 
+                    <h:outputText value="Senha: #{usuarioBean.usuario.senhaUsuario}" /> 
+                </h:panelGrid>
+            </p:dialog>  
+        </h:form> 
+        
+    </ui:define>
+
+</ui:composition>

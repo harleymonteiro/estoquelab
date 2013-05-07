@@ -1,0 +1,41 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:h="http://java.sun.com/jsf/html"
+           xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <h:form>
+            <nav class="menu">
+                <ul>
+                    <li><h:commandLink value="HOME" action="#{componenteBean.linkHome()}"/></li>
+                    <li><h:commandLink value="PEDIDO" action="#{componenteBean.linkHome()}"/>
+                        <ul>
+                            <li><h:commandLink value="NOVO" action="#{componenteBean.linkHome()}"/></li>
+                            <li><h:commandLink value="ENVIAR" action="#{componenteBean.linkHome()}"/></li>
+                            <li><h:commandLink value="LISTAR" action="#{componenteBean.linkHome()}"/></li>
+                         </ul>
+                    </li>
+                    <li><h:commandLink value="RESULTADO" action="#{componenteBean.linkHome()}"/>
+                        <ul>
+                            <li><h:commandLink value="RECEBER" action="#{componenteBean.linkHome()}"/></li>
+                            <li><h:commandLink value="LISTAR" action="#{componenteBean.linkHome()}"/></li>
+                         </ul>
+                    </li>
+                    <li><a href="#">Usuário</a>
+                         <ul>
+
+                             <li><h:commandLink value="Novo" action="#{componenteBean.linkUsuarioListar()}" /></li>
+                             <li><h:commandLink value="Editar" action="#{componenteBean.linkUsuarioEditar()}"/></li>
+                         </ul>
+                    </li>
+                    <li><h:commandLink value="CONTATO" action="#{componenteBean.linkHome()}"/></li>
+                </ul>
+            </nav>
+            </h:form>
+            <!--<h:form id="form-logout">
+                <h:panelGrid columns="2" style="width: 100%;">
+                    <h:outputLabel value="Nome: "/>        
+                    <h:commandButton value="Sair" />
+                </h:panelGrid>
+            </h:form>-->
+    </h:body>
+</f:view>
+

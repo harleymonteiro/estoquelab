@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../layout/layout_app.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"> 
+
+    <ui:define name="content">
+        <h:panelGrid columns="2" id="form-login" class="form-login">  
+            <h:form>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Nome:"/> <p:inputText value="#{usuarioBean.nomeUsuario}"/>
+                    <p:outputLabel value="Login:"/> <p:inputText id="display" value="#{usuarioBean.loginUsuario}"/>
+                    <p:commandButton value="OK" action="#{usuarioBean.buscarLogin()}" update="display"/>
+                </h:panelGrid>    
+            </h:form>
+        </h:panelGrid>
+    </ui:define>
+
+</ui:composition>

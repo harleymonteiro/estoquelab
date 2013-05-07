@@ -1,0 +1,38 @@
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+
+<h:form>
+<nav class="menu">
+    <ul>
+        <li><h:commandLink value="HOME" action="#{componenteBean.linkHome()}"/></li>
+        <li><h:commandLink value="PEDIDO" action="#{componenteBean.linkHome()}"/>
+            <ul>
+                <li><h:commandLink value="NOVO" action="#{componenteBean.linkHome()}"/></li>
+                <li><h:commandLink value="ENVIAR" action="#{componenteBean.linkHome()}"/></li>
+                <li><h:commandLink value="LISTAR" action="#{componenteBean.linkHome()}"/></li>
+             </ul>
+        </li>
+        <li><h:commandLink value="RESULTADO" action="#{componenteBean.linkHome()}"/>
+            <ul>
+                <li><h:commandLink value="RECEBER" action="#{componenteBean.linkHome()}"/></li>
+                <li><h:commandLink value="LISTAR" action="#{componenteBean.linkHome()}"/></li>
+             </ul>
+        </li>
+        <li><a href="#">Usuário</a>
+             <ul>
+                 
+                 <li><h:commandLink value="Novo" action="#{componenteBean.linkUsuarioListar()}"  rendered="#{usuarioBean.sessaoUser().tipoUsuario=='ADMIN'}"/></li>
+                 <li><h:commandLink value="Editar" action="#{componenteBean.linkUsuarioEditar()}"/></li>
+             </ul>
+        </li>
+        <li><h:commandLink value="CONTATO" action="#{componenteBean.linkHome()}"/></li>
+    </ul>
+</nav>
+</h:form>
+<h:form styleClass="formlogin">
+    <h:panelGrid columns="2" style="width: 100%;">
+        <h:outputLabel value="Nome: #{usuarioBean.sessaoUser().nomeUsuario}"/>        
+        <h:commandButton value="Sair" action="#{usuarioBean.sair}"/>
+    </h:panelGrid>
+</h:form>
+
